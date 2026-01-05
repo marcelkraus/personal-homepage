@@ -47,10 +47,10 @@
             </script>
         {% endblock %}
     </head>
-    <body class="bg-sky-5 heropattern-texture-sky-4 text-white" id="top">
+    <body class="bg-sky-5 heropattern-texture-sky-3 text-white" id="top">
         {% for message in app.flashes('success') %}
             <div class="max-w-5xl mx-auto px-8">
-                <div class="mt-16 sm:ml-40 p-4 leading-relax border border-gray-1 rounded-xl bg-white/25 shadow-lg shadow-sky-1/25">
+                <div class="mt-16 sm:ml-40 p-4 leading-relax border border-gray-1 rounded-xl bg-white/25 shadow-lg shadow-sky-2/25">
                     <div class="font-medium">Das hat… geklappt!</div>
                     <div>Vielen Dank für deine Nachricht! Ich werde mich zeitnah mit dir in Verbindung setzen.</div>
                 </div>
@@ -80,7 +80,7 @@
                 </div>
             {% endif %}
         </header>
-        <main class="bg-white heropattern-topography-sky-1 pt-[7.5rem]">
+        <main class="bg-white heropattern-topography-sky-2 pt-[7.5rem]">
             {% block content %}{% endblock %}
         </main>
         <footer class="max-w-5xl mx-auto px-8 py-16 text-xs">
