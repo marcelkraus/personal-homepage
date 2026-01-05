@@ -47,10 +47,10 @@
             </script>
         {% endblock %}
     </head>
-    <body class="bg-sky-900 heropattern-texture-sky-700 text-white" id="top">
+    <body class="bg-sky-5 heropattern-texture-sky-4 text-white" id="top">
         {% for message in app.flashes('success') %}
             <div class="max-w-5xl mx-auto px-8">
-                <div class="mt-16 sm:ml-40 p-4 leading-relax border border-gray-300 rounded-xl bg-white/25 shadow-lg shadow-sky-100/25">
+                <div class="mt-16 sm:ml-40 p-4 leading-relax border border-gray-1 rounded-xl bg-white/25 shadow-lg shadow-sky-1/25">
                     <div class="font-medium">Das hat… geklappt!</div>
                     <div>Vielen Dank für deine Nachricht! Ich werde mich zeitnah mit dir in Verbindung setzen.</div>
                 </div>
@@ -68,19 +68,19 @@
             {% if fullHeader %}
                 <div class="mt-16 sm:pl-40">
                     <div class="flex flex-col gap-8 text-2xl sm:text-4xl leading-relax font-serif">
-                        <p class="text-sky-300">
-                            <span class="border-b-2 border-sky-300 pb-2">Hallo Welt!</span>
+                        <p class="text-sky-2">
+                            <span class="border-b-2 border-sky-2 pb-2">Hallo Welt!</span>
                         </p>
                         <p>Ich bin Marcel. Seit 2001 bringe ich dich ins Internet und seit 2017 auch in den App Store.</p>
                         <p>Was kann ich für dich tun?</p>
                     </div>
                 </div>
                 <div class="mt-16 -mb-28 sm:pl-40 text-center">
-                    <a class="inline-block px-16 py-8 rounded-xl text-2xl font-medium ring-8 ring-white bg-sky-600 hover:bg-sky-900 text-white" href="{{ path('app_homepage') }}#kontakt">Sag's mir per Mail!</a>
+                    <a class="inline-block px-16 py-8 rounded-xl text-2xl font-medium ring-8 ring-white bg-sky-3 hover:bg-sky-5 text-white" href="{{ path('app_homepage') }}#kontakt">Sag's mir per Mail!</a>
                 </div>
             {% endif %}
         </header>
-        <main class="bg-white heropattern-topography-sky-100 pt-[7.5rem]">
+        <main class="bg-white heropattern-topography-sky-1 pt-[7.5rem]">
             {% block content %}{% endblock %}
         </main>
         <footer class="max-w-5xl mx-auto px-8 py-16 text-xs">
