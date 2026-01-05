@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -26,7 +26,7 @@ class DefaultController extends AbstractController
         );
 
         $content = $serializer->deserialize(
-            file_get_contents("../config/content/homepage.json"),
+            file_get_contents($this->getParameter('kernel.project_dir') . '/config/content/homepage.json'),
             'App\Entity\Homepage',
             'json'
         );
