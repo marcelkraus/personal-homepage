@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                'brand': '#f97316', // orange-500
+                brand: '#607E4A', // Mix of all other brand colors (krausgebaut, krausgeborgt, krausgedruckt).
             }
         },
     },
