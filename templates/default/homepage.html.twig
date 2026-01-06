@@ -6,12 +6,12 @@
     <!-- Key Facts -->
 
     <div class="max-w-5xl mx-auto px-8 py-16" id="fakten">
-        <h2 class="pb-16 text-6xl text-sky-3">Key Facts.</h2>
-        <div class="flex flex-wrap gap-8">
+        <h2 class="pb-16 text-6xl text-brand-default">Key Facts.</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for fact in content.facts %}
-                <div class="p-8 border-4 border-gray-1 rounded-xl max-w-64 aspect-square flex flex-col items-start justify-between hover:bg-white text-gray-3">
+                <div class="p-8 border-4 border-secondary-light rounded-xl aspect-square flex flex-col items-start justify-between bg-white">
                     <div class="text">{{ fact.body | raw }}</div>
-                    <div class="text-2xl font-medium text-sky-3">{{ fact.title }}.</div>
+                    <div class="text-2xl font-medium text-brand-default">{{ fact.title }}.</div>
                 </div>
             {% endfor %}
         </div>
@@ -21,18 +21,18 @@
 
     <div class="pt-16 pb-32" id="meilensteine">
         <div class="max-w-5xl mx-auto px-8 text-right">
-            <h2 class="pb-16 text-6xl text-sky-3">My Way.</h2>
+            <h2 class="pb-16 text-6xl text-brand-default">My Way.</h2>
         </div>
-        <div class="bg-sky-5 heropattern-floatingcogs-sky-3">
+        <div class="bg-brand-default heropattern-floatingcogs-secondary-light">
             <div class="max-w-5xl mx-auto flex justify-center sm:justify-end mt-32">
                 <div class="max-w-xl -mt-32 -mb-16 px-8 rounded-xl">
-                    <div class="p-8 border-4 border-gray-1 rounded-xl bg-white">
-                        <ul role="list" class="-mb-8 text-sm text-gray-3">
+                    <div class="p-8 border-4 border-secondary-light rounded-xl bg-white">
+                        <ul role="list" class="-mb-8 text-sm">
                             {% for milestone in content.milestones %}
                                 <li>
                                     <div class="relative pb-8">
                                         {% if not loop.last %}
-                                            <span class="absolute left-6 top-6 -ml-px h-full w-0.5 bg-gray-1" aria-hidden="true"></span>
+                                            <span class="absolute left-6 top-6 -ml-px h-full w-0.5 bg-secondary-light" aria-hidden="true"></span>
                                         {% endif %}
                                         <div class="relative flex items-start space-x-4">
                                             <div class="relative">
@@ -41,7 +41,7 @@
                                             <div class="min-w-0 flex-1">
                                                 <div class="font-medium">
                                                     <div>{{ milestone.name}}, {{ milestone.location }}</div>
-                                                    <div class="mt-0 text-sky-3">
+                                                    <div class="mt-0 text-brand-default">
                                                         {{ milestone.period }}
                                                     </div>
                                                 </div>
@@ -66,35 +66,33 @@
     <!-- Contact -->
 
     <div class="max-w-5xl mx-auto px-8 py-16" id="kontakt">
-        <h2 class="pb-16 text-6xl text-sky-3">Let's Talk.</h2>
-        <div class="text-gray-3">
-            {{ form_start(contactForm, { 'action': path('app_homepage'), 'attr': { 'class': 'p-8 border-4 border-gray-1 rounded-xl bg-white' } }) }}
-                {{  form_errors(contactForm) }}
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        {{ form_label(contactForm.name, null, { 'label_attr': { 'class': 'block text-sm font-medium' } }) }}
-                        <div class="mt-2">
-                            {{ form_widget(contactForm.name, { 'attr': { 'class': 'block w-full px-4 py-2 rounded-xl border-1 border-gray-1 focus:border-sky-3 focus:ring-0' } }) }}
-                        </div>
-                    </div>
-                    <div>
-                        {{ form_label(contactForm.email, null, { 'label_attr': { 'class': 'block text-sm font-medium' } }) }}
-                        <div class="mt-2">
-                            {{ form_widget(contactForm.email, { 'attr': { 'class': 'block w-full px-4 py-2 rounded-xl border-1 border-gray-1 focus:border-sky-3 focus:ring-0' } }) }}
-                        </div>
-                    </div>
-                    <div class="col-span-2">
-                        {{ form_label(contactForm.message, null, { 'label_attr': { 'class': 'block text-sm font-medium' } }) }}
-                        <div class="mt-2">
-                            {{ form_widget(contactForm.message, { 'attr': { 'class': 'block w-full px-4 py-2 rounded-xl border-1 border-gray-1 focus:border-sky-3 focus:ring-0' } }) }}
-                            {{ form_help(contactForm.message) }}
-                        </div>
+        <h2 class="pb-16 text-6xl text-brand-default">Let's Talk.</h2>
+        {{ form_start(contactForm, { 'action': path('app_homepage'), 'attr': { 'class': 'p-8 border-4 border-secondary-light rounded-xl bg-white' } }) }}
+            {{  form_errors(contactForm) }}
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    {{ form_label(contactForm.name, null, { 'label_attr': { 'class': 'block text-sm font-medium' } }) }}
+                    <div class="mt-2">
+                        {{ form_widget(contactForm.name, { 'attr': { 'class': 'block w-full px-4 py-2 rounded-xl border-1 border-secondary-light focus:border-brand-default focus:ring-0' } }) }}
                     </div>
                 </div>
-                <div class="mt-8 text-right -mb-14">
-                    {{ form_widget(contactForm.submit, { 'attr': {  'class': 'px-4 py-2 rounded-xl text-lg border-2 border-gray-1 font-medium ring-8 ring-white bg-sky-3 hover:bg-sky-5 text-white hover:text-white' } }) }}
+                <div>
+                    {{ form_label(contactForm.email, null, { 'label_attr': { 'class': 'block text-sm font-medium' } }) }}
+                    <div class="mt-2">
+                        {{ form_widget(contactForm.email, { 'attr': { 'class': 'block w-full px-4 py-2 rounded-xl border-1 border-secondary-light focus:border-brand-default focus:ring-0' } }) }}
+                    </div>
                 </div>
-            {{ form_end(contactForm) }}
-        </div>
+                <div class="col-span-2">
+                    {{ form_label(contactForm.message, null, { 'label_attr': { 'class': 'block text-sm font-medium' } }) }}
+                    <div class="mt-2">
+                        {{ form_widget(contactForm.message, { 'attr': { 'class': 'block w-full px-4 py-2 rounded-xl border-1 border-secondary-light focus:border-brand-default focus:ring-0' } }) }}
+                        {{ form_help(contactForm.message) }}
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-right -mb-14">
+                {{ form_widget(contactForm.submit, { 'attr': {  'class': 'px-4 py-2 rounded-xl text-lg border-2 border-secondary-light font-medium ring-8 ring-white bg-brand-highlight hover:bg-brand-default text-white hover:text-white' } }) }}
+            </div>
+        {{ form_end(contactForm) }}
     </div>
 {% endblock %}
