@@ -1,27 +1,35 @@
 {
   "facts": [
     {
-      "title": "iOS-Entwickler",
-      "body": "Teil eines engagierten Teams der Chefkoch Gmbh in Bonn."
+      "title": "Senior iOS-Entwickler",
+      "body": "Teil eines engagierten iOS-Teams bei der Chefkoch Gmbh in Bonn."
     },
     {
-      "title": "Dienstleister",
-      "body": "Software-Entwickler, 3D-Drucker und Vermieter von Filmfahrzeugen."
+      "title": "Internet- & IT-Dienstleister",
+      "body": "Selbstständiger Web- & Software-Entwickler und Ansprechpartner für IT-Dienstleistungen aller Art."
+    },
+    {
+      "title": "3D-Druck-Dienstleister",
+      "body": "Experte für die additive Fertigung von Bauteilen aller Art mittels 3D-Druck-Verfahren."
+    },
+    {
+      "title": "Vermieter von Filmfahrzeugen",
+      "body": "Anbieter von kultigen Fahrzeugen aus Film & Fernsehen für Hochzeiten, Conventions und Events aller Art."
     },
     {
       "title": "Familienmensch",
-      "body": "Glücklicher Ehemann, stolzer Vater und passioniertes Herrchen."
+      "body": "Seit 2023 ein glücklicher Ehemann, seit 2024 ein stolzer Vater und seit 2021 ein passioniertes Herrchen."
     },
     {
       "title": "Schrauber",
-      "body": "Fahrer, Betreuer und Restaurator von automobilem Kulturgut."
+      "body": "Nicht nur Vermieter, sondern auch Fahrer, Betreuer und Restaurator von automobilem Kulturgut."
     },
     {
       "title": "Sim Racer",
-      "body": "Die grüne Hölle als zweites Zuhause: 25 km, 73 Kurven, 200 Puls."
+      "body": "Die Rennstrecken dieser Welt und die grüne Hölle als zweites Zuhause: 25 km, 73 Kurven, 200 Puls."
     },
     {
-      "title": "Nerd",
+      "title": "Technik-Nerd",
       "body": "Offen für alle neuen Gadgets und jedes moderne Stück Technik."
     }
   ],

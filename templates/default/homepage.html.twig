@@ -6,7 +6,7 @@
     <!-- Key Facts -->
 
     <div class="max-w-5xl mx-auto px-8 py-16" id="fakten">
-        <h2 class="pb-16 text-6xl text-brand-default">Key Facts.</h2>
+        <h2 class="pb-16 text-6xl text-brand-default">Fakten.</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {% for fact in content.facts %}
                 <div class="p-8 border-4 border-secondary-light rounded-xl aspect-square flex flex-col items-start justify-between bg-white">
@@ -21,7 +21,7 @@
 
     <div class="pt-16 pb-32" id="meilensteine">
         <div class="max-w-5xl mx-auto px-8 text-right">
-            <h2 class="pb-16 text-6xl text-brand-default">My Way.</h2>
+            <h2 class="pb-16 text-6xl text-brand-default">Mein Weg.</h2>
         </div>
         <div class="bg-brand-default heropattern-floatingcogs-secondary-light">
             <div class="max-w-5xl mx-auto flex justify-center sm:justify-end mt-32">
@@ -66,7 +66,7 @@
     <!-- Contact -->
 
     <div class="max-w-5xl mx-auto px-8 py-16" id="kontakt">
-        <h2 class="pb-16 text-6xl text-brand-default">Let's Talk.</h2>
+        <h2 class="pb-16 text-6xl text-brand-default">Auf ein Wort.</h2>
         {{ form_start(contactForm, { 'action': path('app_homepage'), 'attr': { 'class': 'p-8 border-4 border-secondary-light rounded-xl bg-white' } }) }}
             {{  form_errors(contactForm) }}
             <div class="grid grid-cols-2 gap-4">
