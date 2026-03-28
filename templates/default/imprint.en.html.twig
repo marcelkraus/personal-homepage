@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block meta %}
+    {{ parent() }}
+    <meta name="robots" content="noindex,nofollow" />
+{% endblock %}
+
+{% block content %}
+    <div class="max-w-3xl mx-auto px-8 pt-32 pb-24">
+        <h1 class="text-3xl sm:text-4xl font-bold">Imprint</h1>
+        <div class="mt-4 w-12 h-1 bg-accent"></div>
+        <div class="mt-12 prose dark:prose-invert prose-a:text-accent prose-a:no-underline prose-h4:uppercase max-w-none">
+                <div class="rounded-xl border border-amber-500/30 bg-amber-500/10 dark:bg-amber-500/5 p-4 mb-8 text-sm text-foreground-subtle dark:text-foreground-subtle-dark">
+                    <p class="font-medium text-amber-700 dark:text-amber-400 mb-1">Translation notice</p>
+                    <p>This is an automatic translation. The legally binding version is the <a href="{{ path('app_de_imprint') }}">German original</a>.</p>
+                </div>
+                <p>As of: 1 April 2026</p>
+                <p>The following address information is provided solely for legal compliance purposes. Any misuse will be prosecuted accordingly.</p>
+                <h3>Service provider</h3>
+                <p>
+                    Marcel Kraus<br/>
+                    Bonner Straße 88<br/>
+                    50374 Erftstadt
+                </p>
+                <p>VAT identification number: DE225346678</p>
+                <p>
+                    Email: hallo (at) marcelkraus (dot) de<br/>
+                    Phone: Please make initial contact via email
+                </p>
+            </div>
+    </div>
+{% endblock %}

@@ -1,101 +1,169 @@
 <!doctype html>
 
-<html lang="de">
+<html lang="{{ app.request.locale }}" class="scroll-smooth">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% block meta %}
-            <meta property="description" content="iOS- & Web-Entwickler, IT-Dienstleister, 3D-Drucker und Vermieter von Filmfahrzeugen." />
+            <meta name="description" content="{{ 'meta.description'|trans }}" />
             <meta property="og:type" content="website" />
-            <meta property="og:url" content="https://www.marcelkraus.de" />
-            <meta property="og:title" content="Marcel Kraus aus Erftstadt bei Köln" />
-            <meta property="og:description" content="iOS- & Web-Entwickler, IT-Dienstleister, 3D-Drucker und Vermieter von Filmfahrzeugen." />
+            <meta property="og:url" content="https://www.marcelkraus.de{{ app.request.pathInfo == '/' ? '' : app.request.pathInfo }}" />
+            <meta property="og:title" content="{{ 'meta.title'|trans }}" />
+            <meta property="og:description" content="{{ 'meta.description'|trans }}" />
+            <meta property="og:image" content="https://www.marcelkraus.de/images/avatar.jpg" />
+            <link rel="canonical" href="https://www.marcelkraus.de{{ app.request.pathInfo == '/' ? '' : app.request.pathInfo }}" />
+            {% set de_route = switch_route|replace({'_en_': '_de_'}) %}
+            {% set en_route = switch_route|replace({'_de_': '_en_'}) %}
+            <link rel="alternate" hreflang="de" href="https://www.marcelkraus.de{{ path(de_route) }}" />
+            <link rel="alternate" hreflang="en" href="https://www.marcelkraus.de{{ path(en_route) }}" />
+            <link rel="alternate" hreflang="x-default" href="https://www.marcelkraus.de/" />
+            <script type="application/ld+json">
+                {
+                    "@context": "https://schema.org",
+                    "@type": "Person",
+                    "name": "Marcel Kraus",
+                    "jobTitle": "{{ 'hero.job_title'|trans }}",
+                    "url": "https://www.marcelkraus.de",
+                    "image": "https://www.marcelkraus.de/images/avatar.jpg",
+                    "address": {
+                        "@type": "PostalAddress",
+                        "addressLocality": "Erftstadt",
+                        "addressRegion": "Nordrhein-Westfalen",
+                        "addressCountry": "DE"
+                    },
+                    "knowsAbout": ["3D Printing", "App Development", "Apple", "C", "C++", "iOS", "iPadOS", "Objective-C", "Oldtimer Restoration", "PHP", "Swift", "Symfony", "Web Development"]
+                }
+            </script>
         {% endblock %}
+        {% block stylesheets %}{% endblock %}
         <link rel="stylesheet" href="/css/output.css">
-        <title>{% block title %}Marcel Kraus — Dienstleister, Vater und Nerd{% endblock %}</title>
-        <link rel="apple-touch-icon" sizes="57x57" href="{{ asset('apple-icon-57x57.png') }}">
-        <link rel="apple-touch-icon" sizes="60x60" href="{{ asset('apple-icon-60x60.png') }}">
-        <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('apple-icon-72x72.png') }}">
-        <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('apple-icon-76x76.png') }}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('apple-icon-114x114.png') }}">
-        <link rel="apple-touch-icon" sizes="120x120" href="{{ asset('apple-icon-120x120.png') }}">
-        <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('apple-icon-144x144.png') }}">
-        <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('apple-icon-152x152.png') }}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-icon-180x180.png') }}">
-        <link rel="icon" type="image/png" sizes="192x192" href="{{ asset('android-icon-192x192.png') }}">
+        <title>{% block title %}{{ 'meta.title'|trans }}{% endblock %}</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('favicon-96x96.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-        <link rel="manifest" href="{{ asset('manifest.json') }}">
-        <meta name="msapplication-TileColor" content="#ffffff">
-        <meta name="msapplication-TileImage" content="{{ asset('ms-icon-144x144.png') }}">
-        <meta name="theme-color" content="#ffffff">
+
+        <meta name="theme-color" content="#FAFAFA" media="(prefers-color-scheme: light)">
+        <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
         {% block javascript %}
             <script>
                 var _paq = window._paq = window._paq || [];
-                /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
                 _paq.push(["disableCookies"]);
                 _paq.push(['trackPageView']);
                 _paq.push(['enableLinkTracking']);
                 (function() {
-                var u="https://matomo.marcelkraus.de/";
-                _paq.push(['setTrackerUrl', u+'matomo.php']);
-                _paq.push(['setSiteId', '10']);
-                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-                g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
-            })();
+                    var u="https://matomo.marcelkraus.de/";
+                    _paq.push(['setTrackerUrl', u+'matomo.php']);
+                    _paq.push(['setSiteId', '10']);
+                    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                    g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+                })();
             </script>
         {% endblock %}
     </head>
-    <body class="bg-brand-default heropattern-texture-secondary-dark" id="top">
-        {% for message in app.flashes('success') %}
-            <div class="bg-secondary-light border-b-white border-b-8">
-                <div class="max-w-5xl mx-auto px-8 py-4">
-                    <p class="font-medium">Das hat geklappt!</p>
-                    <p>Vielen Dank für deine Nachricht. Ich werde mich zeitnah mit dir in Verbindung setzen.</p>
+    <body class="bg-surface dark:bg-surface-dark text-foreground dark:text-foreground-dark antialiased">
+        <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[60] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-accent focus:text-on-accent focus:text-sm focus:font-medium">{{ 'skip_to_content'|trans }}</a>
+        <header class="fixed top-0 left-0 right-0 z-50 h-20 px-6 flex items-center justify-between bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-sm border-b border-border dark:border-border-dark">
+            <a href="{{ app.request.locale == 'en' ? '/en' : '/' }}" data-nav="hero" class="flex items-center text-foreground dark:text-foreground-dark" aria-label="{{ 'aria_homepage'|trans }}">
+                <svg viewBox="0 0 1070 263" class="h-10 w-auto" xmlns="http://www.w3.org/2000/svg" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" aria-hidden="true">
+                    <g transform="matrix(1.51541,0,0,1.51541,-1445.83,-236.515)">
+                        <g transform="matrix(1.55362,0,0,1.04498,285.877,-424.496)">
+                            <path d="M557.521,678.716L557.521,716.605C557.521,719.218 556.093,721.341 554.335,721.341L528.851,721.341C527.093,721.341 525.665,719.218 525.665,716.605L525.665,678.716C525.665,676.102 527.093,673.98 528.851,673.98L554.335,673.98C556.093,673.98 557.521,676.102 557.521,678.716Z" style="fill:rgb(234,88,12);"/>
+                        </g>
+                        <g transform="matrix(1.55362,0,0,1.04498,211.64,-424.496)">
+                            <path d="M557.521,678.716L557.521,716.605C557.521,719.218 556.093,721.341 554.335,721.341L528.851,721.341C527.093,721.341 525.665,719.218 525.665,716.605L525.665,678.716C525.665,676.102 527.093,673.98 528.851,673.98L554.335,673.98C556.093,673.98 557.521,676.102 557.521,678.716Z" style="fill:rgb(34,197,94);"/>
+                        </g>
+                        <g transform="matrix(1.55362,0,0,1.04498,137.403,-424.496)">
+                            <path d="M557.521,678.716L557.521,716.605C557.521,719.218 556.093,721.341 554.335,721.341L528.851,721.341C527.093,721.341 525.665,719.218 525.665,716.605L525.665,678.716C525.665,676.102 527.093,673.98 528.851,673.98L554.335,673.98C556.093,673.98 557.521,676.102 557.521,678.716Z" style="fill:rgb(21,94,117);"/>
+                        </g>
+                    </g>
+                    <g transform="matrix(1.00169,0,0,1.00134,-584.182,-511.066)">
+                        <text x="567.199px" y="657.784px" style="font-family:'Aller', sans-serif;font-size:200px;fill:currentColor;">mar<tspan x="912.799px 1005.4px 1116.6px" y="657.784px 657.784px 657.784px">cel</tspan>kr<tspan x="1351.4px 1454.8px" y="657.784px 657.784px">au</tspan>s</text>
+                    </g>
+                </svg>
+            </a>
+            <div class="flex items-center gap-6">
+                {% block header_nav %}{% endblock %}
+                <div class="flex items-center gap-1 text-xs text-muted">
+                    <button type="button" id="btn-dark" onclick="setColorMode('dark')" aria-pressed="false" class="transition-colors duration-300 hover:text-foreground dark:hover:text-foreground-dark">{{ 'theme.night'|trans }}</button>
+                    <span>·</span>
+                    <button type="button" id="btn-light" onclick="setColorMode('light')" aria-pressed="true" class="transition-colors duration-300 hover:text-foreground dark:hover:text-foreground-dark">{{ 'theme.day'|trans }}</button>
+                </div>
+                <div class="flex items-center gap-1 text-xs border-l border-border dark:border-border-dark pl-6 text-muted">
+                    {% if app.request.locale == 'de' %}
+                        <span class="text-foreground dark:text-foreground-dark font-medium">DE</span>
+                        <span>&middot;</span>
+                        <a href="{{ path(switch_route) }}" class="hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300" onclick="document.cookie='locale=en;path=/;max-age=31536000;SameSite=Lax'">EN</a>
+                    {% else %}
+                        <a href="{{ path(switch_route) }}" class="hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300" onclick="document.cookie='locale=de;path=/;max-age=31536000;SameSite=Lax'">DE</a>
+                        <span>&middot;</span>
+                        <span class="text-foreground dark:text-foreground-dark font-medium">EN</span>
+                    {% endif %}
                 </div>
             </div>
-        {% endfor %}
-        <header class="max-w-5xl mx-auto px-8 py-16 text-white">
-            <div class="flex items-center gap-8">
-                <a href="{{ path('app_homepage') }}"><img alt="Avatar von Marcel Kraus aus Erftstadt" class="w-32 aspect-square rounded-full ring-4 sm:ring-8 ring-white" src="{{ asset('images/marcelkraus.jpg') }}"/></a>
-                <div class="flex flex-col gap-2 font-medium sm:font-light">
-                    <h1 class="text-2xl sm:text-6xl">Marcel Kraus</h1>
-                    <p class="text-lg sm:text-3xl">
-                        Dienstleister, Vater und Nerd</p>
-                </div>
-            </div>
-            {% if fullHeader %}
-                <div class="mt-16 sm:pl-40">
-                    <div class="flex flex-col gap-8 text-2xl sm:text-4xl leading-relax font-serif">
-                        <p><span class="border-b-2 pb-2">Hallo Welt, ich bin Marcel.</span></p>
-                        <p>Seit 2001 bringe ich dich ins Internet, seit 2017 in den Apple App Store.</p>
-                        <p>Was kann ich für dich tun?</p>
-                    </div>
-                </div>
-                <div class="mt-16 -mb-28 sm:pl-40 text-center">
-                    <a class="inline-block px-16 py-8 rounded-xl text-2xl font-medium ring-8 ring-white bg-brand-highlight hover:bg-brand-default text-white" href="{{ path('app_homepage') }}#kontakt">Sag's mir per Mail!</a>
-                </div>
-            {% endif %}
         </header>
-        <main class="bg-white heropattern-topography-secondary-light pt-[7.5rem]">
-            {% block content %}{% endblock %}
-        </main>
-        <footer class="max-w-5xl mx-auto px-8 py-16 text-xs text-white">
-            <div class="grid grid-cols-3 gap-8 items-center">
-                <a href="https://krausgedruckt.de"><img alt="Logo von krausgedruckt.de, einem Projekt von Marcel Kraus" class="max-h-12 w-full object-contain" src="{{ asset('images/partner/krausgedruckt.png') }}" /></a>
-                <a href="https://www.jurassicjeep.de"><img alt="Logo von Jurassic Jeep, einem Projekt von Marcel Kraus" class="max-h-12 w-full object-contain" src="{{ asset('images/partner/jurassic-jeep.png') }}" /></a>
-                <a href="https://www.myknight.de"><img alt="Logo von myKNIGHT, einem Projekt von Marcel Kraus" class="max-h-12 w-full object-contain" src="{{ asset('images/partner/myknight.png') }}" /></a>
+        <footer class="fixed bottom-0 left-0 right-0 z-50 py-3 sm:h-14 sm:py-0 px-4 sm:px-6 flex items-center justify-between gap-3 bg-surface/80 dark:bg-surface-dark/80 backdrop-blur-sm border-t border-border dark:border-border-dark text-xs text-muted">
+            <span class="sm:hidden">&copy; {{ "now" | date("Y") }}</span>
+            <div class="hidden sm:flex flex-col leading-tight">
+                <span>&copy; {{ "now" | date("Y") }} Marcel Kraus</span>
+                <span>{{ 'footer.notice'|trans }}</span>
             </div>
-            <div class="mt-16 pt-4 border-t border-white flex flex-col sm:flex-row gap-2 justify-center sm:justify-between">
-                <div class="flex gap-2 justify-center sm:justify-start">
-                    <span class="font-medium">© 2024-{{ "now" | date("Y") }} Marcel Kraus, Erftstadt</span>
-                </div>
-                <div class="flex gap-2 justify-center sm:justify-end">
-                    <a class="hover:underline" href="{{ path('app_imprint') }}">Impressum</a>
-                    <a class="hover:underline" href="{{ path('app_data_privacy') }}">Datenschutz</a>
-                </div>
+            <div class="flex items-center gap-3">
+                <a href="{{ path(app.request.locale == 'en' ? 'app_en_imprint' : 'app_de_imprint') }}" class="hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'footer.imprint'|trans }}</a>
+                <a href="{{ path(app.request.locale == 'en' ? 'app_en_data_privacy' : 'app_de_data_privacy') }}" class="hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'footer.data_privacy'|trans }}</a>
             </div>
         </footer>
+        <script>
+            // Color mode
+            function setColorMode(mode) {
+                localStorage.setItem('colorMode', mode);
+                document.documentElement.classList.toggle('dark', mode === 'dark');
+                updateColorModeButtons();
+            }
+
+            function updateColorModeButtons() {
+                const isDark = document.documentElement.classList.contains('dark');
+                const btnDark = document.getElementById('btn-dark');
+                const btnLight = document.getElementById('btn-light');
+                if (btnDark) {
+                    btnDark.classList.toggle('text-foreground', isDark);
+                    btnDark.classList.toggle('dark:text-foreground-dark', isDark);
+                    btnDark.classList.toggle('font-medium', isDark);
+                    btnDark.setAttribute('aria-pressed', isDark);
+                }
+                if (btnLight) {
+                    btnLight.classList.toggle('text-foreground', !isDark);
+                    btnLight.classList.toggle('dark:text-foreground-dark', !isDark);
+                    btnLight.classList.toggle('font-medium', !isDark);
+                    btnLight.setAttribute('aria-pressed', !isDark);
+                }
+            }
+
+            (function () {
+                const saved = localStorage.getItem('colorMode');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const useDark = saved === 'dark' || (!saved && prefersDark);
+                document.documentElement.classList.toggle('dark', useDark);
+            })();
+
+            document.addEventListener('DOMContentLoaded', updateColorModeButtons);
+        </script>
+        <script>
+            document.addEventListener('click', (e) => {
+                const navLink = e.target.closest('[data-nav]');
+                if (navLink == null) {
+                    return;
+                }
+                const target = document.getElementById(navLink.dataset.nav);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        </script>
+        {% block body %}
+            <main id="main-content">
+                {% block content %}{% endblock %}
+            </main>
+        {% endblock %}
     </body>
 </html>

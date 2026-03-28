@@ -1,0 +1,48 @@
+meta:
+    title: 'Marcel Kraus: Senior Software-Entwickler aus Erftstadt bei Köln'
+    description: 'Marcel Kraus: Senior Software-Entwickler aus Erftstadt bei Köln. iOS- & Web-Entwicklung, Symfony, Swift.'
+
+skip_to_content: 'Zum Inhalt springen'
+aria_homepage: 'Startseite'
+
+theme:
+    night: 'Nacht'
+    day: 'Tag'
+
+footer:
+    notice: 'Aus Erftstadt mit Liebe.'
+    imprint: 'Impressum'
+    data_privacy: 'Datenschutz'
+
+nav:
+    milestones: 'Meilensteine'
+    projects: 'Projekte'
+    location: 'Standort'
+
+hero:
+    alt_avatar: 'Avatar von Marcel Kraus'
+    job_title: 'Senior Software-Entwickler'
+    intro: 'iOS- & Web-Entwickler, Dienstleister, Multitalent aus Erftstadt bei Köln. Ich baue Apps, Websites – und auf Wunsch auch alles dazwischen.'
+
+milestones:
+    title: 'Meilensteine'
+    description: 'Vom liebevoll „Showpraktikanten" genannten Ausflug in die Berufswelt bis zum Senior Software-Entwickler, vom privaten Hobby in die Selbstständigkeit mit drei Tätigkeiten – die wichtigsten Stationen meiner beruflichen Laufbahn auf einen Blick.'
+    since: 'Seit'
+    aria_previous: 'Vorheriges Projekt'
+    aria_next: 'Nächstes Projekt'
+
+projects:
+    title: 'Projekte'
+    description: 'Dies ist eine Auswahl meiner im persönlichen Umfeld umgesetzten Projekte. Kundenprojekte und Referenzen aus meiner Selbstständigkeit werde ich in naher Zukunft an anderer Stelle präsentieren.'
+    details: 'Details'
+    view_project: 'Projekt ansehen'
+    aria_project: 'Projekt'
+    aria_close: 'Schliessen'
+
+location:
+    title: 'Standort'
+    address: 'Adresse'
+    country: 'Deutschland'
+    directions_title: 'Anfahrt'
+    directions_text: 'Der Autobahnabfahrt Erftstadt in Richtung Lechenich folgen. An der ersten Ampel rechts abbiegen und nach zwei Kreisverkehren geradeaus weiterfahren. Nach ca. 250 m befindet sich mein Wohnort auf der linken Seite.'
+    plan_route: 'Route planen'

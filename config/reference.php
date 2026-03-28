@@ -125,40 +125,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     ...<string, DefinitionType|AliasType|PrototypeType|StackType|ArgumentsType|null>
  * }
  * @psalm-type ExtensionType = array<string, mixed>
- * @psalm-type AntispamConfig = array{
- *     passive?: bool|Param, // Global default for whether included components should cause hard failures // Default: false
- *     stealth?: bool|Param, // Global default for whether included components issue verbose or stealthy error messages // Default: false
- *     enabled?: bool|Param, // Allows you to globally disable all bundle functions, specifically for functional testing // Default: true
- *     profiles?: array<string, array{ // Name the profile // Default: []
- *         stealth?: bool|Param, // Defines whether measures in this profile issue stealthy error messages // Default: true
- *         passive?: bool|Param|null, // Passive mode will not make any of the included checks actually fail validation, they will still be logged. Null inherits global setting // Default: null
- *         banned_markup?: array{ // Defines whether to disallow content resembling markup languages like HTML and BBCode
- *             html?: bool|Param, // Default: true
- *             bbcode?: bool|Param, // Default: true
- *         },
- *         banned_phrases?: array{ // Simple array of phrases which are rejected when encountered in a submitted text field
- *             phrases?: list<scalar|Param|null>,
- *         },
- *         banned_scripts?: array{ // Banned script types, like Cyrillic or Arabic (see docs for commonly used ISO 15924 names)
- *             scripts?: list<scalar|Param|null>,
- *             max_characters?: int|Param, // Default: null
- *             max_percentage?: float|Param, // Default: 0
- *         },
- *         honeypot?: string|array{ // Inject an invisible honeypot field in forms, baiting spambots to fill it in
- *             field?: scalar|Param|null, // Base name of the injected field
- *             attributes?: array<string, scalar|Param|null>,
- *         },
- *         timer?: array{ // Verify that time between retrieval and submission of a form is within human boundaries
- *             field?: scalar|Param|null, // Base name of the injected field // Default: "_validation"
- *             min?: float|Param, // Default: 3
- *             max?: float|Param, // Default: 3600
- *         },
- *         url_count?: array{ // Configure limits to number of URLs permitted in text fields
- *             max?: int|Param, // Maximum number of URLs accepted per text field // Default: null
- *             max_identical?: int|Param, // Maximum number of identical URLs accepted per text field // Default: null
- *         },
- *     }>,
- * }
  * @psalm-type FrameworkConfig = array{
  *     secret?: scalar|Param|null,
  *     http_method_override?: bool|Param, // Set true to enable support for the '_method' request parameter to determine the intended HTTP method on POST requests. // Default: false
@@ -182,7 +148,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         cookie_name?: scalar|Param|null, // The name of the cookie to use when using stateless protection. // Default: "csrf-token"
  *     },
  *     form?: bool|array{ // Form configuration
- *         enabled?: bool|Param, // Default: true
+ *         enabled?: bool|Param, // Default: false
  *         csrf_protection?: bool|array{
  *             enabled?: scalar|Param|null, // Default: null
  *             token_id?: scalar|Param|null, // Default: null
@@ -361,7 +327,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     validation?: bool|array{ // Validation configuration
- *         enabled?: bool|Param, // Default: true
+ *         enabled?: bool|Param, // Default: false
  *         enable_attributes?: bool|Param, // Default: true
  *         static_method?: list<scalar|Param|null>,
  *         translation_domain?: scalar|Param|null, // Default: "validators"
@@ -603,7 +569,7 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         }>,
  *     },
  *     mailer?: bool|array{ // Mailer configuration
- *         enabled?: bool|Param, // Default: true
+ *         enabled?: bool|Param, // Default: false
  *         message_bus?: scalar|Param|null, // The message bus to use. Defaults to the default bus if the Messenger component is installed. // Default: null
  *         dsn?: scalar|Param|null, // Default: null
  *         transports?: array<string, scalar|Param|null>,
@@ -753,14 +719,12 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *     imports?: ImportsConfig,
  *     parameters?: ParametersConfig,
  *     services?: ServicesConfig,
- *     antispam?: AntispamConfig,
  *     framework?: FrameworkConfig,
  *     twig?: TwigConfig,
  *     "when@dev"?: array{
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
  *         services?: ServicesConfig,
- *         antispam?: AntispamConfig,
  *         framework?: FrameworkConfig,
  *         twig?: TwigConfig,
  *     },
@@ -768,7 +732,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
  *         services?: ServicesConfig,
- *         antispam?: AntispamConfig,
  *         framework?: FrameworkConfig,
  *         twig?: TwigConfig,
  *     },
@@ -776,7 +739,6 @@ use Symfony\Component\Config\Loader\ParamConfigurator as Param;
  *         imports?: ImportsConfig,
  *         parameters?: ParametersConfig,
  *         services?: ServicesConfig,
- *         antispam?: AntispamConfig,
  *         framework?: FrameworkConfig,
  *         twig?: TwigConfig,
  *     },

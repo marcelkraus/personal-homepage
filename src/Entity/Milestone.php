@@ -4,27 +4,28 @@ namespace App\Entity;
 
 class Milestone
 {
-    protected string $name;
-    protected string $logo;
-    protected string $location;
-    protected ?string $position;
-    protected string $period;
-    protected string $tagline;
-    protected string $body;
-
-    public function __construct(string $name, string $logo, string $location, string $period, string $tagline, string $body)
-    {
-        $this->name = $name;
-        $this->logo = $logo;
-        $this->location = $location;
-        $this->period = $period;
-        $this->tagline = $tagline;
-        $this->body = $body;
+    public function __construct(
+        private string $language,
+        private string $company,
+        private string $logo,
+        private string $location,
+        private string $position,
+        private string $startDate,
+        private ?string $endDate,
+        private string $description,
+        private array $tags = [],
+    ) {
+        // Intentionally left blank.
     }
 
-    public function getName(): string
+    public function getLanguage(): string
     {
-        return $this->name;
+        return $this->language;
+    }
+
+    public function getCompany(): string
+    {
+        return $this->company;
     }
 
     public function getLogo(): string
@@ -37,13 +38,28 @@ class Milestone
         return $this->location;
     }
 
-    public function getPeriod(): string
+    public function getPosition(): string
     {
-        return $this->period;
+        return $this->position;
     }
 
-    public function getBody(): string
+    public function getStartDate(): string
     {
-        return $this->body;
+        return $this->startDate;
+    }
+
+    public function getEndDate(): ?string
+    {
+        return $this->endDate;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getTags(): array
+    {
+        return $this->tags;
     }
 }

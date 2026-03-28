@@ -1,0 +1,48 @@
+meta:
+    title: 'Marcel Kraus: Senior Software Developer from Erftstadt near Cologne'
+    description: 'Marcel Kraus: Senior Software Developer from Erftstadt near Cologne. iOS & web development, Symfony, Swift.'
+
+skip_to_content: 'Skip to content'
+aria_homepage: 'Home'
+
+theme:
+    night: 'Night'
+    day: 'Day'
+
+footer:
+    notice: 'From Erftstadt with Love.'
+    imprint: 'Imprint'
+    data_privacy: 'Privacy Policy'
+
+nav:
+    milestones: 'Milestones'
+    projects: 'Projects'
+    location: 'Location'
+
+hero:
+    alt_avatar: 'Avatar of Marcel Kraus'
+    job_title: 'Senior Software Developer'
+    intro: 'iOS & web developer, freelancer, all-rounder from Erftstadt near Cologne. I build apps, websites – and everything in between.'
+
+milestones:
+    title: 'Milestones'
+    description: 'From a lovingly nicknamed "show intern" excursion into the working world to senior software developer, from a private hobby to self-employment with three businesses – the key stages of my professional career at a glance.'
+    since: 'Since'
+    aria_previous: 'Previous project'
+    aria_next: 'Next project'
+
+projects:
+    title: 'Projects'
+    description: 'This is a selection of projects I have realized in my personal environment. Client projects and references from my freelance work will be showcased elsewhere in the near future.'
+    details: 'Details'
+    view_project: 'View project'
+    aria_project: 'Project'
+    aria_close: 'Close'
+
+location:
+    title: 'Location'
+    address: 'Address'
+    country: 'Germany'
+    directions_title: 'Directions'
+    directions_text: 'Follow the Erftstadt motorway exit towards Lechenich. Turn right at the first traffic light and continue straight ahead after two roundabouts. After approx. 250 m, my residence is on the left-hand side.'
+    plan_route: 'Plan route'

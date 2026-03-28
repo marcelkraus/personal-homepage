@@ -2,13 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\ContactRequest;
-use App\Form\Type\ContactRequestType;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Entity\Milestone;
+use App\Entity\Project;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
@@ -17,69 +15,75 @@ use Symfony\Component\Serializer\Serializer;
 
 class DefaultController extends AbstractController
 {
-    #[Route('/', name: 'app_homepage', methods: ['GET'])]
-    function services(): Response
+    #[Route('/', name: 'app_de_homepage', defaults: ['_locale' => 'de'], methods: ['GET'])]
+    #[Route('/en', name: 'app_en_homepage', defaults: ['_locale' => 'en'], methods: ['GET'])]
+    function homepage(Request $request, string $_locale): Response
     {
+        $request->setLocale($_locale);
+
         $serializer = new Serializer(
             [new ObjectNormalizer(), new ArrayDenormalizer()],
             [new JsonEncoder()]
         );
 
-        $content = $serializer->deserialize(
-            file_get_contents($this->getParameter('kernel.project_dir') . '/config/content/homepage.json'),
-            'App\Entity\Homepage',
+        $projectDir = $this->getParameter('kernel.project_dir');
+
+        $allMilestones = $serializer->deserialize(
+            file_get_contents($projectDir . '/config/content/milestones.json'),
+            Milestone::class . '[]',
             'json'
         );
 
-        $contactForm = $this->createForm(ContactRequestType::class, new ContactRequest(), [
-            'antispam_profile' => 'default',
-        ]);
+        $allProjects = $serializer->deserialize(
+            file_get_contents($projectDir . '/config/content/projects.json'),
+            Project::class . '[]',
+            'json'
+        );
+
+        $milestones = array_values(array_filter(
+            $allMilestones,
+            fn(Milestone $milestone) => $milestone->getLanguage() === $_locale
+        ));
+
+        $projects = array_values(array_filter(
+            $allProjects,
+            fn(Project $project) => $project->getLanguage() === $_locale
+        ));
 
         return $this->render('default/homepage.html.twig', [
-            'content' => $content,
-            'contactForm' => $contactForm,
+            'milestones' => $milestones,
+            'projects' => $projects,
+            'switch_route' => $_locale === 'en' ? 'app_de_homepage' : 'app_en_homepage',
         ]);
     }
 
-    #[Route('/', methods: ['POST'])]
-    function index(Request $request, MailerInterface $mailer): Response
+    #[Route('/impressum', name: 'app_de_imprint', defaults: ['_locale' => 'de'], methods: ['GET'])]
+    #[Route('/en/imprint', name: 'app_en_imprint', defaults: ['_locale' => 'en'], methods: ['GET'])]
+    function imprint(Request $request, string $_locale): Response
     {
-        $form = $this->createForm(ContactRequestType::class, new ContactRequest(), [
-            'antispam_profile' => 'default',
+        $request->setLocale($_locale);
+
+        $template = $_locale === 'en'
+            ? 'default/imprint.en.html.twig'
+            : 'default/imprint.de.html.twig';
+
+        return $this->render($template, [
+            'switch_route' => $_locale === 'en' ? 'app_de_imprint' : 'app_en_imprint',
         ]);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $contactRequest = $form->getData();
-            $message = (new TemplatedEmail())
-                ->from($_SERVER['CONTACT_FORM_SENDER_ADDRESS'])
-                ->to($_SERVER['CONTACT_FORM_RECIPIENT_ADDRESS'])
-                ->replyTo($contactRequest->getEmail())
-                ->subject('Neue Kontaktanfrage erhalten')
-                ->textTemplate('message/contact-request.txt.twig')
-                ->context([
-                    'name' => $contactRequest->getName(),
-                    'emailAddress' => $contactRequest->getEmail(),
-                    'message' => $contactRequest->getMessage(),
-                ]);
-
-            $mailer->send($message);
-
-            $this->addFlash('success', '<default>');
-
-            return $this->redirectToRoute('app_homepage');
-        }
     }
 
-    #[Route('/impressum', name: 'app_imprint', methods: ['GET'])]
-    function imprint(): Response
+    #[Route('/datenschutz', name: 'app_de_data_privacy', defaults: ['_locale' => 'de'], methods: ['GET'])]
+    #[Route('/en/privacy-policy', name: 'app_en_data_privacy', defaults: ['_locale' => 'en'], methods: ['GET'])]
+    function dataPrivacy(Request $request, string $_locale): Response
     {
-        return $this->render('default/imprint.html.twig');
-    }
+        $request->setLocale($_locale);
 
-    #[Route('/datenschutz', name: 'app_data_privacy', methods: ['GET'])]
-    function dataPrivacy(): Response
-    {
-        return $this->render('default/data-privacy.html.twig');
+        $template = $_locale === 'en'
+            ? 'default/data-privacy.en.html.twig'
+            : 'default/data-privacy.de.html.twig';
+
+        return $this->render($template, [
+            'switch_route' => $_locale === 'en' ? 'app_de_data_privacy' : 'app_en_data_privacy',
+        ]);
     }
 }
