@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link rel="stylesheet" href="{{ asset('vendor/leaflet/leaflet.css') }}" />
 {% endblock %}
 
 {% block header_nav %}
-    <nav class="hidden sm:flex items-center gap-6 text-sm font-medium sm:border-r sm:border-border sm:dark:border-border-dark sm:pr-6">
-        <a href="#milestones" data-nav="milestones" class="text-muted hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'nav.milestones'|trans }}</a>
-        <a href="#work" data-nav="work" class="text-muted hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'nav.projects'|trans }}</a>
-        <a href="#location" data-nav="location" class="text-muted hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'nav.location'|trans }}</a>
+    <nav class="flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 text-base sm:text-sm font-medium sm:border-r sm:border-border sm:dark:border-border-dark sm:pr-6">
+        <a href="#milestones" data-nav="milestones" onclick="closeMobileMenu()" class="text-muted hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'nav.milestones'|trans }}</a>
+        <a href="#work" data-nav="work" onclick="closeMobileMenu()" class="text-muted hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'nav.projects'|trans }}</a>
+        <a href="#location" data-nav="location" onclick="closeMobileMenu()" class="text-muted hover:text-foreground dark:hover:text-foreground-dark transition-colors duration-300">{{ 'nav.location'|trans }}</a>
     </nav>
+    <hr class="sm:hidden w-full h-px border-0 bg-border dark:bg-border-dark" />
 {% endblock %}
 
 {% block body %}
@@ -19,14 +20,13 @@
         <div class="text-center animate-fade-in">
             <img
                 alt="{{ 'hero.alt_avatar'|trans }}"
-                class="w-40 h-40 rounded-2xl ring-4 ring-border dark:ring-border-dark mx-auto shadow-lg transition-transform duration-500 hover:scale-105"
+                class="w-40 h-40 rounded-full ring-4 ring-border dark:ring-border-dark mx-auto shadow-lg transition-transform duration-500 hover:scale-105 object-cover"
                 src="{{ asset('images/avatar.jpg') }}"
             />
             <h1 class="mt-8 text-4xl sm:text-6xl font-bold tracking-tight">Marcel Kraus</h1>
-            <p class="text-3xl sm:text-5xl font-bold tracking-tight text-accent">{{ 'hero.job_title'|trans }}</p>
-            <p class="mt-12 max-w-xl mx-auto text-lg text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">
-                {{ 'hero.intro'|trans|raw }}
-            </p>
+            <p class="mt-3 text-xl sm:text-2xl font-medium tracking-tight text-accent">{{ 'hero.job_title'|trans }}</p>
+            <p class="mt-8 text-lg sm:text-xl font-medium text-foreground dark:text-foreground-dark">{{ 'hero.claim'|trans }}</p>
+            <p class="mt-4 max-w-xl mx-auto text-lg text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">{{ 'hero.intro'|trans|raw }}</p>
         </div>
         <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-surface dark:from-surface-dark to-transparent pointer-events-none z-[5]"></div>
         <a href="#milestones" class="absolute bottom-20 z-10 animate-bounce-down text-muted transition-colors hover:text-accent">
@@ -37,7 +37,7 @@
     </section>
 
     {# ── Meilensteine ── #}
-    <section class="px-8 pt-24 pb-24 scroll-mt-40" id="milestones">
+    <section class="max-w-6xl mx-auto px-8 pt-24 pb-24 scroll-mt-40" id="milestones">
         <h2 class="text-3xl sm:text-4xl font-bold">{{ 'milestones.title'|trans }}</h2>
         <div class="mt-4 w-12 h-1 bg-accent"></div>
         <p class="mt-8 max-w-2xl text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">{{ 'milestones.description'|trans }}</p>
@@ -52,7 +52,9 @@
                     {% for milestone in milestones %}
                         {% set year = milestone.startDate[:4] %}
                         <div class="flex flex-col items-center">
-                            <button onclick="goToSlide({{ loop.index0 }})" class="w-3 h-3 rounded-[3px] transition-all duration-300 cursor-pointer hover:scale-150 {{ loop.first ? 'bg-brand-marcelkraus scale-125' : 'bg-muted' }}" data-slide="{{ loop.index0 }}"></button>
+                            <button onclick="goToSlide({{ loop.index0 }})" aria-label="{{ milestone.position }}" class="p-2 -m-2 cursor-pointer group">
+                                <span data-slide="{{ loop.index0 }}" class="block w-3 h-3 rounded-[3px] transition-all duration-300 group-hover:scale-150 {{ loop.first ? 'bg-brand-marcelkraus scale-125' : 'bg-muted' }}"></span>
+                            </button>
                             {% if prevYear != year %}
                                 <span class="mt-2 text-xs text-muted font-medium">{{ milestone.endDate is null ? 'milestones.since'|trans ~ ' ' ~ year : (milestone.endDate[:4] != year ? year ~ '–' ~ milestone.endDate[:4] : year) }}</span>
                             {% endif %}
@@ -70,6 +72,7 @@
                     onclick="scrollMilestone(-1)"
                     class="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-muted transition-colors duration-300 hover:text-foreground dark:hover:text-foreground-dark hidden"
                     id="btn-prev"
+                    aria-label="{{ 'milestones.aria_previous'|trans }}"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
@@ -100,7 +103,7 @@
                                 </div>
                                 <div class="flex flex-wrap gap-2 mt-6">
                                     {% for tag in milestone.tags | sort %}
-                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-surface-subtle dark:bg-surface-subtle-dark text-foreground dark:text-foreground-dark transition-colors duration-300 hover:bg-brand-marcelkraus hover:text-on-accent dark:hover:bg-brand-marcelkraus dark:hover:text-on-accent">{{ tag }}</span>
+                                        <span class="px-3 py-1 text-xs font-medium rounded-full bg-surface-subtle dark:bg-surface-subtle-dark text-foreground dark:text-foreground-dark">{{ tag }}</span>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -111,6 +114,7 @@
                     onclick="scrollMilestone(1)"
                     class="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-muted transition-colors duration-300 hover:text-foreground dark:hover:text-foreground-dark hidden"
                     id="btn-next"
+                    aria-label="{{ 'milestones.aria_next'|trans }}"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
@@ -148,7 +152,7 @@
                         <p class="text-sm text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">{{ milestone.description }}</p>
                         <div class="flex flex-wrap gap-2 mt-4">
                             {% for tag in milestone.tags | sort %}
-                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-surface-subtle dark:bg-surface-subtle-dark text-foreground dark:text-foreground-dark transition-colors duration-300 hover:bg-brand-marcelkraus hover:text-on-accent dark:hover:bg-brand-marcelkraus dark:hover:text-on-accent">{{ tag }}</span>
+                                <span class="px-3 py-1 text-xs font-medium rounded-full bg-surface-subtle dark:bg-surface-subtle-dark text-foreground dark:text-foreground-dark">{{ tag }}</span>
                             {% endfor %}
                         </div>
                     </div>
@@ -159,12 +163,12 @@
     </section>
 
     {# ── Projekte ── #}
-    <section class="px-8 pt-24 pb-32 scroll-mt-40" id="work">
+    <section class="max-w-6xl mx-auto px-8 pt-24 pb-32 scroll-mt-40" id="work">
         <h2 class="text-3xl sm:text-4xl font-bold">{{ 'projects.title'|trans }}</h2>
         <div class="mt-4 w-12 h-1 bg-accent"></div>
         <p class="mt-8 max-w-2xl text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">{{ 'projects.description'|trans }}</p>
 
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-4xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
             {% for project in projects %}
                 <button
                     onclick="openShowcase({{ loop.index0 }})"
@@ -192,35 +196,26 @@
     </section>
 
     {# ── Standort ── #}
-    <section class="scroll-mt-40 px-8 pt-24 pb-32 isolate" id="location">
+    <section class="max-w-6xl mx-auto scroll-mt-40 px-8 pt-24 pb-32 isolate" id="location">
         <h2 class="text-3xl sm:text-4xl font-bold">{{ 'location.title'|trans }}</h2>
         <div class="mt-4 w-12 h-1 bg-accent"></div>
         <div class="mt-16 grid grid-cols-1 lg:grid-cols-5 gap-6">
         <div class="lg:col-span-3 min-h-80 lg:min-h-96 rounded-2xl overflow-hidden border border-border dark:border-border-dark shadow-lg">
-            <div id="map" class="w-full h-full min-h-80"></div>
+            <div id="map" class="w-full h-full min-h-80" role="img" aria-label="{{ 'location.map_alt'|trans }}"></div>
         </div>
-        <div class="lg:col-span-2 flex flex-col justify-center px-8 py-16 lg:py-24 lg:px-12">
-            <div class="grid grid-cols-2 gap-6 lg:grid-cols-1">
-                <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-wide text-muted">{{ 'location.address'|trans }}</h3>
-                    <address class="mt-2 not-italic text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">
-                        Marcel Kraus<br>
-                        Bonner Straße 88<br>
-                        50374 Erftstadt<br>
-                        {{ 'location.country'|trans }}
-                    </address>
-                </div>
-                <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-wide text-muted">{{ 'location.directions_title'|trans }}</h3>
-                    <p class="mt-2 text-sm text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">{{ 'location.directions_text'|trans }}</p>
-                    <a href="https://maps.apple.com/?daddr=Bonner+Straße+88,+50374+Erftstadt,+Deutschland" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mt-4 px-5 py-3 rounded-xl bg-accent text-white text-sm font-medium hover:bg-accent/90 transition-colors duration-300 w-fit">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        {{ 'location.plan_route'|trans }}
-                    </a>
-                </div>
+        <div class="lg:col-span-2 flex flex-col justify-center gap-8 px-8 py-16 lg:py-24 lg:px-12">
+            <div>
+                <h3 class="text-xs font-semibold uppercase tracking-wide text-muted">{{ 'location.address'|trans }}</h3>
+                <address class="mt-2 text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed">
+                    Marcel Kraus<br>
+                    Bonner Straße 88<br>
+                    50374 Erftstadt<br>
+                    {{ 'location.country'|trans }}
+                </address>
+            </div>
+            <div>
+                <h3 class="text-xs font-semibold uppercase tracking-wide text-muted">{{ 'location.contact'|trans }}</h3>
+                {% include 'partials/social_links.html.twig' with { wrapperClass: 'flex items-center gap-5 mt-3', iconClass: 'w-6 h-6' } %}
             </div>
         </div>
         </div>
@@ -230,7 +225,7 @@
     <div id="showcase-overlay" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 backdrop-blur-sm" role="dialog" aria-modal="true" onclick="closeShowcase(event)">
         <div class="relative max-w-2xl w-full mx-4" onclick="event.stopPropagation()">
             {# Desktop-Pfeile (seitlich) #}
-            <button id="showcase-prev-desktop" class="hidden absolute -left-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg lg:items-center lg:justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(-1)" aria-label="{{ 'milestones.aria_previous'|trans }}">
+            <button id="showcase-prev-desktop" class="hidden absolute -left-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg lg:items-center lg:justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(-1)" aria-label="{{ 'projects.aria_previous'|trans }}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -244,19 +239,19 @@
                 <div id="showcase-content"></div>
                 <div class="flex justify-center gap-2 mt-6" id="showcase-dots"></div>
             </div>
-            <button id="showcase-next-desktop" class="hidden absolute -right-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg lg:items-center lg:justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(1)" aria-label="{{ 'milestones.aria_next'|trans }}">
+            <button id="showcase-next-desktop" class="hidden absolute -right-14 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg lg:items-center lg:justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(1)" aria-label="{{ 'projects.aria_next'|trans }}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                 </svg>
             </button>
             {# Mobile-Pfeile (unterhalb des Dialogs) #}
             <div class="flex lg:hidden justify-center gap-6 mt-4" id="showcase-nav-mobile">
-                <button id="showcase-prev-mobile" class="hidden w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg items-center justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(-1)" aria-label="{{ 'milestones.aria_previous'|trans }}">
+                <button id="showcase-prev-mobile" class="hidden w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg items-center justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(-1)" aria-label="{{ 'projects.aria_previous'|trans }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <button id="showcase-next-mobile" class="hidden w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg items-center justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(1)" aria-label="{{ 'milestones.aria_next'|trans }}">
+                <button id="showcase-next-mobile" class="hidden w-10 h-10 rounded-full bg-surface-elevated dark:bg-surface-elevated-dark shadow-lg items-center justify-center hover:bg-surface-subtle dark:hover:bg-surface-subtle-dark transition-colors duration-300 cursor-pointer" onclick="navigateShowcase(1)" aria-label="{{ 'projects.aria_next'|trans }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
@@ -346,12 +341,12 @@
                 <p class="text-sm text-muted mb-6">${t.category}</p>
                 <div class="text-foreground-subtle dark:text-foreground-subtle-dark leading-relaxed mb-6 space-y-4">${t.showcase.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('')}</div>
                 <div class="flex flex-wrap gap-2 mb-6">
-                    ${t.tags.map(tag => `<span class="px-3 py-1 text-xs font-medium rounded-full bg-surface-subtle dark:bg-surface-subtle-dark text-foreground dark:text-foreground-dark transition-colors duration-300 hover:bg-accent hover:text-on-accent">${tag}</span>`).join('')}
+                    ${t.tags.map(tag => `<span class="px-3 py-1 text-xs font-medium rounded-full bg-surface-subtle dark:bg-surface-subtle-dark text-foreground dark:text-foreground-dark">${tag}</span>`).join('')}
                 </div>
                 ${t.url ? `<a href="${t.url}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">${t.urlLabel || i18n.viewProject} &rarr;</a>` : ''}
             `;
             showcaseDots.innerHTML = projectData.map((_, i) =>
-                `<button onclick="renderShowcase(${i})" class="w-2 h-2 rounded-full transition-all duration-300 ${i === index ? 'bg-accent scale-125' : 'bg-muted'}" aria-label="${i18n.project} ${i + 1}"></button>`
+                `<button onclick="renderShowcase(${i})" class="p-2 -m-1 cursor-pointer group" aria-label="${i18n.project} ${i + 1}"><span class="block w-2 h-2 rounded-full transition-all duration-300 ${i === index ? 'bg-accent scale-125' : 'bg-muted'}"></span></button>`
             ).join('');
             const hasPrev = index > 0;
             const hasNext = index < projectData.length - 1;
@@ -449,7 +444,7 @@
         window.addEventListener('scroll', updateActiveNav, { passive: true });
         updateActiveNav();
     </script>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="{{ asset('vendor/leaflet/leaflet.js') }}"></script>
     <script>
         const map = L.map('map', { scrollWheelZoom: false }).setView([50.8005, 6.7772], 15);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

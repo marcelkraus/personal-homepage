@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Datenschutz | {{ parent() }}{% endblock %}
+{% block title %}Datenschutz · Marcel Kraus{% endblock %}
 
-{% block meta %}
-    {{ parent() }}
-    <meta name="robots" content="noindex,nofollow" />
-{% endblock %}
+{% block meta_description %}Datenschutzerklärung der Website von Marcel Kraus.{% endblock %}
+
+{% block meta_robots %}<meta name="robots" content="noindex,follow" />{% endblock %}
 
 {% block content %}
     <div class="max-w-3xl mx-auto px-8 pt-32 pb-24">
@@ -15,7 +14,7 @@
                 <h3 id="m716">Präambel</h3>
                 <p>Mit der folgenden Datenschutzerklärung möchte ich dich darüber aufklären, welche Arten deiner personenbezogenen Daten (nachfolgend auch kurz als „Daten" bezeichnet) ich zu welchen Zwecken und in welchem Umfang verarbeite. Die Datenschutzerklärung gilt für alle von mir durchgeführten Verarbeitungen personenbezogener Daten, sowohl im Rahmen der Erbringung meiner Leistungen als auch insbesondere auf meinen Webseiten und in mobilen Applikationen (nachfolgend zusammenfassend bezeichnet als „Onlineangebot").</p>
                 <p>Die verwendeten Begriffe sind nicht geschlechtsspezifisch.</p>
-                <p>Stand: 1. April 2026</p>
+                <p>Stand: 26. Mai 2026</p>
                 <h3>Inhaltsübersicht</h3>
                 <ul class="index">
                     <li><a class="index-link" href="#m716">Präambel</a></li>
@@ -149,14 +148,13 @@
                     <li><span class="font-medium">Rechtsgrundlagen:</span> Die Datenverarbeitung durch Apple im Rahmen der In-App-Kaufabwicklung und des App Stores sowie der iCloud-Synchronisierung richtet sich nach den Datenschutzbestimmungen von Apple.</li>
                 </ul>
                 <h3 id="mMap">Karteneinbindung (OpenStreetMap)</h3>
-                <p>Auf meiner Website binde ich eine interaktive Karte ein, die Kartenmaterial von OpenStreetMap (OSM) verwendet. Die Darstellung erfolgt mithilfe der JavaScript-Bibliothek Leaflet, die über das Content Delivery Network unpkg.com geladen wird. Beim Aufrufen der Seite werden Kartenkacheln von den Servern der OpenStreetMap Foundation (OSMF) sowie die Leaflet-Bibliothek von unpkg.com nachgeladen. Dabei wird jeweils deine IP-Adresse an diese Dienste übermittelt.</p>
-                <p>Über einen Link auf der Seite kannst du eine Routenplanung über Apple Karten aufrufen. Ein Klick auf diesen Link öffnet Apple Karten in einem neuen Fenster. Die Datenverarbeitung erfolgt dann durch Apple Inc. gemäß deren Datenschutzbestimmungen.</p>
+                <p>Auf meiner Website binde ich eine interaktive Karte ein, die Kartenmaterial von OpenStreetMap (OSM) verwendet. Die Darstellung erfolgt mithilfe der JavaScript-Bibliothek Leaflet, die lokal von meinem Server ausgeliefert wird. Beim Aufrufen der Seite werden Kartenkacheln von den Servern der OpenStreetMap Foundation (OSMF) nachgeladen. Dabei wird deine IP-Adresse an OSMF übermittelt.</p>
                 <p>Die Einbindung erfolgt auf Grundlage meines berechtigten Interesses an einer ansprechenden Darstellung meines Standorts gemäß Art. 6 Abs. 1 lit. f DSGVO.</p>
                 <ul class="m-elements">
                     <li><span class="font-medium">Verarbeitete Datenarten:</span> IP-Adresse, Nutzungsdaten.</li>
                     <li><span class="font-medium">Betroffene Personen:</span> Nutzer der Website.</li>
                     <li><span class="font-medium">Rechtsgrundlagen:</span> Berechtigte Interessen (Art. 6 Abs. 1 lit. f DSGVO).</li>
-                    <li><span class="font-medium">Dienstanbieter:</span> OpenStreetMap Foundation (OSMF), 132 Maney Hill Road, Sutton Coldfield, West Midlands, B72 1JU, United Kingdom; <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">Datenschutzerklärung</a>. unpkg.com (betrieben über Cloudflare); <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Datenschutzerklärung Cloudflare</a>. Apple Inc., One Apple Park Way, Cupertino, CA 95014, USA; <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener">Datenschutzerklärung Apple</a>.</li>
+                    <li><span class="font-medium">Dienstanbieter:</span> OpenStreetMap Foundation (OSMF), 132 Maney Hill Road, Sutton Coldfield, West Midlands, B72 1JU, United Kingdom; <a href="https://wiki.osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">Datenschutzerklärung</a>.</li>
                 </ul>
                 <h3 id="m15">Änderung und Aktualisierung der Datenschutzerklärung</h3>
                 <p>Ich bitte dich, dich regelmäßig über den Inhalt meiner Datenschutzerklärung zu informieren. Ich passe die Datenschutzerklärung an, sobald die Änderungen der von mir durchgeführten Datenverarbeitungen dies erforderlich machen. Ich informiere dich, sobald durch die Änderungen eine Mitwirkungshandlung deinerseits (z.B. Einwilligung) oder eine sonstige individuelle Benachrichtigung erforderlich wird.</p>

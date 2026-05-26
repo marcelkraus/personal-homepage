@@ -1,5 +1,7 @@
 
 ###> custom ###
+/.claude/plans/*
+/.claude/settings.local.json
 /node_modules
 ###< custom ###
 

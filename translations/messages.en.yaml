@@ -1,8 +1,10 @@
 meta:
+    description: 'Online CV of Marcel Kraus, senior software developer for iOS and web from Erftstadt near Cologne. Career, milestones and projects at a glance.'
+    image_alt: 'Marcel Kraus, Senior Software Developer'
     title: 'Marcel Kraus, Senior Software Developer'
-    description: 'I offer app & web development, IT services, and anything in between.'
 
 skip_to_content: 'Skip to content'
+aria_email: 'Email'
 aria_homepage: 'Home'
 
 theme:
@@ -15,21 +17,23 @@ footer:
     data_privacy: 'Privacy Policy'
 
 nav:
+    location: 'Location'
+    menu: 'Menu'
     milestones: 'Milestones'
     projects: 'Projects'
-    location: 'Location'
 
 hero:
     alt_avatar: 'Avatar of Marcel Kraus'
+    claim: 'Known for the hat. Hired for the head.'
+    intro: 'At home in Erftstadt near Cologne, in iOS and on the web – remote by preference. Permanently employed, self-employed on the side.'
     job_title: 'Senior Software Developer'
-    intro: 'iOS & web developer, freelancer, all-rounder from Erftstadt near Cologne. I build apps, websites – and everything in between.'
 
 milestones:
     title: 'Milestones'
     description: 'From a lovingly nicknamed "show intern" excursion into the working world to senior software developer, from a private hobby to self-employment with three businesses – the key stages of my professional career at a glance.'
     since: 'Since'
-    aria_previous: 'Previous project'
-    aria_next: 'Next project'
+    aria_previous: 'Previous milestone'
+    aria_next: 'Next milestone'
 
 projects:
     title: 'Projects'
@@ -37,12 +41,13 @@ projects:
     details: 'Details'
     view_project: 'View project'
     aria_project: 'Project'
+    aria_previous: 'Previous project'
+    aria_next: 'Next project'
     aria_close: 'Close'
 
 location:
-    title: 'Location'
     address: 'Address'
+    contact: 'Contact'
     country: 'Germany'
-    directions_title: 'Directions'
-    directions_text: 'Follow the Erftstadt motorway exit towards Lechenich. Turn right at the first traffic light and continue straight ahead after two roundabouts. After approx. 250 m, my residence is on the left-hand side.'
-    plan_route: 'Plan route'
+    map_alt: 'Map: Erftstadt near Cologne'
+    title: 'Location'
