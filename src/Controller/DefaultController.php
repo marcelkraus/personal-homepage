@@ -86,4 +86,10 @@ class DefaultController extends AbstractController
             'switch_route' => $_locale === 'en' ? 'app_de_data_privacy' : 'app_en_data_privacy',
         ]);
     }
+
+    #[Route('/kontakt-per-whats-app', name: 'app_contact_whats_app', methods: ['GET'])]
+    function whatsAppRedirect(): Response
+    {
+        return $this->redirect('https://wa.me/message/TKVKBR7RPHA7B1');
+    }
 }

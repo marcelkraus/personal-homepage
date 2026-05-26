@@ -126,6 +126,11 @@ englische (mit `/en`-Präfix). Namensschema: `app_{locale}_{name}`.
 | `GET /datenschutz` | `app_de_data_privacy` | Datenschutz |
 | `GET /en/privacy-policy` | `app_en_data_privacy` | Privacy Policy |
 
+Zusätzlich gibt es eine sprachneutrale Utility-Route
+`GET /kontakt-per-whats-app` (`app_contact_whats_app`), die per 302 auf
+den WhatsApp-Kurzlink weiterleitet (hält die Nummer aus dem Markup; vom
+WhatsApp-Icon in `social_links.html.twig` verlinkt).
+
 ## Internationalisierung
 
 - **Standardsprache:** Deutsch (kein URL-Präfix)
